@@ -48,8 +48,6 @@ public class RNGoogleSigninModule
         _activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("YOUHOU");
-                System.out.println("API IS NULL " + _apiClient == null);
 
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestEmail()
@@ -130,7 +128,8 @@ public class RNGoogleSigninModule
             GoogleSignInAccount acct = result.getSignInAccount();
             params.putString("name", acct.getDisplayName());
             params.putString("email", acct.getEmail());
-            params.putString("accessToken", acct.getIdToken());
+            params.putString("idToken", acct.getIdToken());
+            params.putString("accessToken", acct.getServerAuthCode());
 
             _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit("googleSignIn", params);

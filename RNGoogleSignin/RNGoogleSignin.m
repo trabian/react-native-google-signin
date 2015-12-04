@@ -23,6 +23,11 @@ RCT_EXPORT_METHOD(signIn)
     [[GIDSignIn sharedInstance] signIn];
 }
 
+RCT_EXPORT_METHOD(signInSilently)
+{
+    [[GIDSignIn sharedInstance] signInSilently];
+}
+
 RCT_EXPORT_METHOD(signOut)
 {
     [[GIDSignIn sharedInstance] signOut];
@@ -45,6 +50,7 @@ RCT_EXPORT_METHOD(signOut)
                            @"name": user.profile.name,
                            @"email": user.profile.email,
                            @"accessToken": user.authentication.accessToken,
+                           @"idToken": user.authentication.idToken,
                            @"accessTokenExpirationDate": [NSNumber numberWithDouble:user.authentication.accessTokenExpirationDate.timeIntervalSinceNow]
                            };
 
