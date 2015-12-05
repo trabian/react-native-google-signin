@@ -1,6 +1,6 @@
 package co.apptailor.googlesignin;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -13,17 +13,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class RNGoogleSigninPackage implements ReactPackage {
-    private Activity _activity;
+    
+    private FragmentActivity mActivity;
 
-    public RNGoogleSigninPackage(Activity activity) {
+    public RNGoogleSigninPackage(FragmentActivity activity) {
         super();
-        _activity = activity;
+        mActivity = activity;
     }
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new RNGoogleSigninModule(reactContext, _activity));
+        modules.add(new RNGoogleSigninModule(reactContext, mActivity));
         return modules;
     }
 
