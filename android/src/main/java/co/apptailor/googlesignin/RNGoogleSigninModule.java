@@ -56,8 +56,6 @@ public class RNGoogleSigninModule
     @ReactMethod
     public void init(final String clientId) {
 
-       Log.v(TAG, clientId);
-
        UiThreadUtil.runOnUiThread (
             new Runnable() {
                 @Override
@@ -102,7 +100,7 @@ public class RNGoogleSigninModule
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        Log.v(TAG, "Signout complete");
+
                     }
                 });
     }
@@ -125,14 +123,11 @@ public class RNGoogleSigninModule
     }
 
     public static void onActivityResult(Intent data, int resultCode) {
-        Log.v(TAG, Integer.toString(resultCode));
         GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
         handleSignInResult(result);
     }
 
     private static void handleSignInResult(GoogleSignInResult result) {
-
-        Log.v(TAG, result.toString());
         
         WritableMap params = Arguments.createMap();
 
@@ -157,8 +152,6 @@ public class RNGoogleSigninModule
         
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
-        Log.v(TAG, "Connection failed");
         
         if (!connectionResult.hasResolution()) {
             GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), mActivity, 0).show();
