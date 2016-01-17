@@ -60,7 +60,7 @@ public class RNGoogleSigninModule
             new Runnable() {
                 @Override
                 public void run() {
-        
+
                     GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestIdToken(clientId)
                         .requestServerAuthCode(clientId)
@@ -68,12 +68,28 @@ public class RNGoogleSigninModule
                         .build();
                     
                     mApiClient = new GoogleApiClient.Builder(mActivity)
-                        .enableAutoManage(mActivity, RNGoogleSigninModule.this)
                         .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                         .build();
+
+                    mApiClient.connect();
                     
                     start();
                     
+                }
+            });
+        
+    }
+
+    @ReactMethod
+    public void disconnect() {
+
+       UiThreadUtil.runOnUiThread (
+            new Runnable() {
+                @Override
+                public void run() {
+                    if (mApiClient != null && mApiClient.isConnected()) {
+                        mApiClient.disconnect();
+                    }
                 }
             });
         
